@@ -1,8 +1,9 @@
 import logo from "./pair-of-bills.png"
 import "./App.css";
 import { useEffect } from "react";
-import { User } from "./components/User/index";
+import { User } from "./components/User";
 import { useState } from "react";
+import {Loading} from "./components/Loading"
 
 function App() {
   let [usersList, setUserslist] = useState([])
@@ -13,19 +14,24 @@ function App() {
   return (
     <div className="app">
       <header className="app__header">        
-        <div className="app__logo"><img src={logo} ></img></div>
+        <div className="app__logo"><img src={logo} alt="" ></img></div>
         <div className="app__title"><h1>Paytab</h1></div>        
       </header>
       <article className="container main">
         <h2 className="users__list__title">Usuários</h2>
         <h3 className="users__list__subtitle">Selecione quem receberá o pagamento</h3>
         <ul className="users__list">
-          {usersList.map(item=>
-            <User pic={item.img} name={item.name} id={item.id} username={item.username}/>                 
-          )}          
+          {
+            usersList.length > 0 
+              ? usersList.map(item=>
+                <User pic={item.img} name={item.name} id={item.id} username={item.username}/>              
+              )
+              :
+            <Loading />
+          }  
         </ul>
       </article>
-      <footer className="footer"></footer>
+      <footer className="footer"><p>© 2022 - Desenvolvido por JD Rodrigues</p></footer>
     </div>
   );
 }
