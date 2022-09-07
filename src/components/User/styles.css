@@ -1,0 +1,42 @@
+.user {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 5px;
+    border-bottom: var(--contrast) solid 2px;
+    border-radius: 5px;
+    background-color: var(--secondary);
+}
+  
+.user__profile {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.user__pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;    
+}
+
+.user__name, .user__id__username {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.user__pay {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--main);
+    color: var(--secondary);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.user__pay:hover {
+    background-color: var(--main-hover);
+}
