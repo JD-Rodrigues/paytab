@@ -1,6 +1,6 @@
 import styles from "./styles.css"
 
-export function User({pic, name, id, username}) {
+export function User({pic, name, id, username, setSelectedUser}) {
     return (
         <li className="user" key={id}>
             <div className="user__profile">                
@@ -10,10 +10,13 @@ export function User({pic, name, id, username}) {
                     <p className="user__id__username">
                         ID:{id} - Username:{username}
                     </p>
-                </div>
-                
+                </div>                
             </div>
-            <button className="user__pay">Pagar</button>
+            <button 
+                onClick={()=>setSelectedUser(name)} 
+                className="user__pay">
+                    Pagar
+            </button>
         </li>
     )
 }

@@ -40,3 +40,14 @@
 .user__pay:hover {
     background-color: var(--main-hover);
 }
+
+@media (min-width: 768px) {
+    .user {
+      padding: 10px;
+    }
+
+    .user__name, .user__id__username {
+        font-size: 14px;
+        line-height: 20px;
+    }
+  }

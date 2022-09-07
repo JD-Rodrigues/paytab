@@ -67,4 +67,10 @@
   background-image: linear-gradient(3deg,#5808b3 60%, #00ddec );
 }
 
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+  }
+}
+
 

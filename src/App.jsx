@@ -8,8 +8,10 @@ import { ModalPay } from "./components/ModalPay";
 
 function App() {
   let [usersList, setUserslist] = useState([])
+  let [selectedUser, setSelectedUser] = useState("")
+
   useEffect(()=>{
-      let users = fetch("https://run.mocky.io/v3/824b2d3f-47ca-4591-9c35-8c3dec016e69").then(data=>data.json()).then(data=> setUserslist(data)).then(console.log(typeof usersList))   
+      let users = fetch("https://run.mocky.io/v3/824b2d3f-47ca-4591-9c35-8c3dec016e69").then(data=>data.json()).then(data=> setUserslist(data))
   },[])
 
   return (
@@ -25,12 +27,12 @@ function App() {
           {
             usersList.length > 0 
               ? usersList.map(item=>
-                <User pic={item.img} name={item.name} id={item.id} username={item.username}/>              
+                <User pic={item.img} name={item.name} setSelectedUser={setSelectedUser} id={item.id} username={item.username}/>  
               )
-              :
-            <Loading />
-          }  
-          <ModalPay />
+              : <Loading />                   
+          }   
+          {selectedUser && <ModalPay name={selectedUser} setSelectedUser={setSelectedUser} /> }     
+            
         </ul>
       </article>
       <footer className="footer"><p>© 2022 - Desenvolvido por JD Rodrigues</p></footer>
