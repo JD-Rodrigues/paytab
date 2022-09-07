@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { User } from "./components/User";
 import { useState } from "react";
 import {Loading} from "./components/Loading"
+import { ModalPay } from "./components/ModalPay";
 
 function App() {
   let [usersList, setUserslist] = useState([])
@@ -29,6 +30,7 @@ function App() {
               :
             <Loading />
           }  
+          <ModalPay />
         </ul>
       </article>
       <footer className="footer"><p>© 2022 - Desenvolvido por JD Rodrigues</p></footer>

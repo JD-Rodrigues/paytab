@@ -2,7 +2,7 @@ import styles from "./styles.css"
 
 export function User({pic, name, id, username}) {
     return (
-        <li className="user">
+        <li className="user" key={id}>
             <div className="user__profile">                
                 <img className="user__pic " src={pic} alt="Foto de perfil do usuário" />
                 <div className="user__info__wrapper">

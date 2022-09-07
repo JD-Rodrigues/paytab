@@ -1,0 +1,42 @@
+.modal__pay {    
+    min-width: 300px;
+    position: fixed;
+    top: 100px;
+    background-color: var(--secondary);
+    border: var(--main) solid 1px;
+}
+
+.modal__pay__header {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--secondary);
+    background-color: var(--main);
+}
+
+.form__pay {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.form__input {
+    height: 30px;
+    border: var(--secondary-text) solid 1px;
+    border-radius: 3px;
+}
+
+.form__input--submit {
+    width: 70px;
+    align-self: center;
+    background-color: var(--main);
+    color: var(--secondary);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form__input--submit:hover {
+    background-color: var(--main-hover);
+}
