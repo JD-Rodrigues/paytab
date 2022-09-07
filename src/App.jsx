@@ -25,6 +25,7 @@ function App() {
           )}          
         </ul>
       </article>
+      <footer className="footer"></footer>
     </div>
   );
 }
