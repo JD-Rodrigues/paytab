@@ -71,6 +71,14 @@
   .container {
     width: 768px;
   }
+
+  .users__list__title {
+    font-size: 18px;
+  }
+
+  .users__list__subtitle {
+    font-size: 12px;
+  }
 }
 
 

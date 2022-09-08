@@ -2,6 +2,7 @@ import styles from "./styles.css"
 import {FormPay} from "../FormPay/index"
 
 export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
+    const input = document.querySelector(".form__input")
     const validCard = "1111111111111111"
     const invalidCard = "4111111111111234"
     const bodyPost = {
@@ -11,6 +12,16 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
             destination_user_id: 0,
             value:0
           }
+
+    const validateInput = () => {
+        const input = document.querySelector(".form__input")
+        if (!input.value) {
+            alert("Insira o valor do pagamento!") 
+            return false
+        } else {
+            return true
+        }       
+    }
     
     const sendMoney = async () => {
         const selectedCard = document.querySelector(".select__card")
@@ -27,9 +38,9 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
         } else {
             console.log("Reprovada")
             return "Reprovada"
-        }
-        
+        }        
     }
+
     return (
         <div className="modal__pay__wrapper">
             <header className="modal__pay__header">
@@ -46,8 +57,11 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
                     onClick={
                         async (e) => {
                             e.preventDefault()
-                            setTransactionStatus(await sendMoney()) 
-                            setSelectedUser("")                         
+                            if(validateInput()){
+                                setTransactionStatus(await sendMoney()) 
+                                setSelectedUser("") 
+                            }
+                                                  
                         }
                     }
                 >
