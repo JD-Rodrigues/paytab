@@ -34,7 +34,7 @@ function App() {
               : <Loading />                   
           }   
           {selectedUser && <ModalPay name={selectedUser} setSelectedUser={setSelectedUser} transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} />}
-          {transactionStatus !== "" && <PostPaymentModal transactionStatus={transactionStatus}/>}
+          {transactionStatus !== "" && <PostPaymentModal transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus}/>}
                
         </ul>
       </article>

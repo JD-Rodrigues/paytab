@@ -3,8 +3,8 @@ import {FormPay} from "../FormPay/index"
 
 export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
     const input = document.querySelector(".form__input")
-    const validCard = "1111111111111111"
-    const invalidCard = "4111111111111234"
+    const validCard = "Cartão com final 1111"
+    const invalidCard = "Cartão com final 1234"
     const bodyPost = {
             card_number: '1111111111111111',
             cvv: 789,

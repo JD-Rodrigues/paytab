@@ -5,7 +5,6 @@
     background-color: var(--secondary);
     border: var(--main) solid 1px;
     border-radius: 5px;
-    z-index: 999;
 }
 
 .modal__pay__header {

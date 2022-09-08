@@ -1,6 +1,9 @@
 .post__pay__status {
     padding: 30px;
     font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
 
 strong {
@@ -9,7 +12,7 @@ strong {
 
 @media (min-width: 768px) {
     .post__pay__status {
-        padding: 50px;
+        padding: 30px;
         font-size: 16px;
     }
 }
