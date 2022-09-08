@@ -1,8 +1,8 @@
 import styles from "./styles.css"
 
-export function User({pic, name, id, username, setSelectedUser}) {
+export function User({pic, name, id, username, setSelectedUser, setTransactionStatus}) {
     return (
-        <li className="user" key={id}>
+        <li className="user">
             <div className="user__profile">                
                 <img className="user__pic " src={pic} alt="Foto de perfil do usuário" />
                 <div className="user__info__wrapper">
@@ -13,7 +13,10 @@ export function User({pic, name, id, username, setSelectedUser}) {
                 </div>                
             </div>
             <button 
-                onClick={()=>setSelectedUser(name)} 
+                onClick={()=>{
+                    setTransactionStatus("")
+                    setSelectedUser(name)
+                }}                 
                 className="user__pay">
                     Pagar
             </button>

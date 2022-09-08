@@ -1,7 +1,6 @@
 import styles from "./styles.css"
-import {FormPay} from "../FormPay/index"
 
-export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
+export function FormPay({name, setSelectedUser, setTransactionStatus}) {
     const validCard = "1111111111111111"
     const invalidCard = "4111111111111234"
     const bodyPost = {
@@ -23,6 +22,7 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
 
             const responseJson = await response.json()
             const status = responseJson.status
+            console.log(status)
             return status
         } else {
             console.log("Reprovada")
@@ -36,20 +36,17 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
                 Pagamento para <span className="receiver__name">{name}</span>
             </header> 
             <form className="form__pay" action="">
-                <input type="number" className="form__input" placeholder="R$ 0,00" />
+                <input type="number" className="form__input" placeholder="R$ 0,00"/>
                 <select className="form__input select__card">
                     <option>{validCard}</option>
                     <option>{invalidCard}</option>
                 </select>
-                <button 
-                    className="form__input form__input--submit" 
-                    onClick={
-                        async (e) => {
-                            e.preventDefault()
-                            setTransactionStatus(await sendMoney()) 
-                            setSelectedUser("")                         
-                        }
+                <button className="form__input form__input--submit" onClick={(e) => {
+                        e.preventDefault()
+                        setTransactionStatus(sendMoney()) 
+                        setSelectedUser("")                         
                     }
+                }
                 >
                     Pagar 
                 </button>
@@ -58,5 +55,3 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
         </div>
     )
 }
-
-// <FormPay name={name} setSelectedUser={setSelectedUser} setTransactionStatus={setTransactionStatus}/>

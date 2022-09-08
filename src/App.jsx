@@ -5,10 +5,12 @@ import { User } from "./components/User";
 import { useState } from "react";
 import {Loading} from "./components/Loading"
 import { ModalPay } from "./components/ModalPay";
+import { PostPaymentModal } from "./components/PostPaymentModal";
 
 function App() {
   let [usersList, setUserslist] = useState([])
   let [selectedUser, setSelectedUser] = useState("")
+  let [transactionStatus, setTransactionStatus] = useState("")
 
   useEffect(()=>{
       let users = fetch("https://run.mocky.io/v3/824b2d3f-47ca-4591-9c35-8c3dec016e69").then(data=>data.json()).then(data=> setUserslist(data))
@@ -27,12 +29,13 @@ function App() {
           {
             usersList.length > 0 
               ? usersList.map(item=>
-                <User pic={item.img} name={item.name} setSelectedUser={setSelectedUser} id={item.id} username={item.username}/>  
+                <User pic={item.img} name={item.name} key={item.id} selectedUser={selectedUser} setSelectedUser={setSelectedUser} setTransactionStatus={setTransactionStatus} id={item.id} username={item.username}/>  
               )
               : <Loading />                   
           }   
-          {selectedUser && <ModalPay name={selectedUser} setSelectedUser={setSelectedUser} /> }     
-            
+          {selectedUser && <ModalPay name={selectedUser} setSelectedUser={setSelectedUser} transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} />}
+          {transactionStatus !== "" && <PostPaymentModal transactionStatus={transactionStatus}/>}
+               
         </ul>
       </article>
       <footer className="footer"><p>© 2022 - Desenvolvido por JD Rodrigues</p></footer>
