@@ -1,5 +1,4 @@
 import styles from "./styles.css"
-import {FormPay} from "../FormPay/index"
 
 export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
     const input = document.querySelector(".form__input")
@@ -36,7 +35,6 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
             const status = responseJson.status
             return status
         } else {
-            console.log("Reprovada")
             return "Reprovada"
         }        
     }
@@ -47,30 +45,36 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
                 Pagamento para <span className="receiver__name">{name}</span>
             </header> 
             <form className="form__pay" action="">
-                <input type="number" className="form__input" placeholder="R$ 0,00" />
+                <input 
+                  type="number" 
+                  className="form__input" 
+                  placeholder="R$ 0,00" 
+                />
                 <select className="form__input select__card">
-                    <option>{validCard}</option>
-                    <option>{invalidCard}</option>
+                  <option>{validCard}</option>
+                  <option>{invalidCard}</option>
                 </select>
                 <button 
-                    className="form__input form__input--submit" 
-                    onClick={
-                        async (e) => {
-                            e.preventDefault()
-                            if(validateInput()){
-                                setTransactionStatus(await sendMoney()) 
-                                setSelectedUser("") 
-                            }
-                                                  
-                        }
+                  className="form__input form__input--submit" 
+                  onClick = {
+                    async (e) => {
+                      e.preventDefault()
+                      if(validateInput()){
+                        setTransactionStatus(await sendMoney()) 
+                        setSelectedUser("") 
+                      }                                                  
                     }
+                  }
                 >
-                    Pagar 
+                  Pagar 
                 </button>
-                <p onClick={()=> setSelectedUser("")} className="back">← Voltar</p>
+                <p 
+                  onClick={()=> setSelectedUser("")} 
+                  className="back"
+                >
+                  ← Voltar
+                </p>
             </form>          
         </div>
     )
 }
-
-// <FormPay name={name} setSelectedUser={setSelectedUser} setTransactionStatus={setTransactionStatus}/>
