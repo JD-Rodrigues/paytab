@@ -20,7 +20,7 @@ export function User({pic, name, id, username, setSelectedUser, setTransactionSt
             <button 
                 onClick={()=>{
                     setTransactionStatus("")
-                    setSelectedUser(name)
+                    setSelectedUser({name:name,id:id})
                 }}                 
                 className="user__pay">
                     Pagar

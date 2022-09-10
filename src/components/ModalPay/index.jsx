@@ -2,22 +2,21 @@ import styles from "./styles.css"
 
 // Modal de pagamento
 
-export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
-    const input = document.querySelector(".form__input")
+export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, paidValue, setPaidValue}) {
     const validCard = "Cartão com final 1111"
     const invalidCard = "Cartão com final 1234"
     const bodyPost = {
-            card_number: '1111111111111111',
-            cvv: 789,
-            expiry_date: '01/18',
-            destination_user_id: 0,
-            value:0
-          }
+      card_number: '1111111111111111',
+      cvv: 789,
+      expiry_date: '01/18',
+      destination_user_id: selectedUser.id,
+      value:paidValue
+  }
 
     // Verifica se algum valor foi inserido.
-    
+
     const validateInput = () => {
-        const input = document.querySelector(".form__input")
+        const input = document.querySelector(".form__input") 
         if (!input.value) {
             alert("Insira o valor do pagamento!") 
             return false
@@ -26,35 +25,36 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
         }       
     }
     
-    // Realiza o post de pagamento e retorna se foi aprovado ou não.
+    // Chama o endpoint de pagamento que aprovará ou reprovará a transação.
 
-    const sendMoney = async () => {
+    const sendMoney = async (dataPost) => {
         const selectedCard = document.querySelector(".select__card")
+
         if (selectedCard.value === validCard) {
             const response = await fetch("https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989",
             {
               method: "POST",
-              body: JSON.stringify(bodyPost) 
+              body: JSON.stringify(dataPost) 
             })
-
             const responseJson = await response.json()
             const status = responseJson.status
             return status
         } else {
-            return "Reprovada"
+            return "Reprovada" 
         }        
     }
 
     return (
         <div className="modal__pay__wrapper">
             <header className="modal__pay__header">
-                Pagamento para <span className="receiver__name">{name}</span>
+                Pagamento para <span className="receiver__name">{selectedUser.name}</span>
             </header> 
             <form className="form__pay" action="">
                 <input 
                   type="number" 
                   className="form__input" 
                   placeholder="R$ 0,00" 
+                  onInput={(e)=>setPaidValue(e.target.value)}
                 />
                 <select className="form__input select__card">
                   <option>{validCard}</option>
@@ -65,9 +65,9 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
                   onClick = {
                     async (e) => {
                       e.preventDefault()
-                      if(validateInput()){
-                        setTransactionStatus(await sendMoney()) 
-                        setSelectedUser("") 
+                      if(validateInput()){                       
+                          setTransactionStatus(await sendMoney(bodyPost)) 
+                          setSelectedUser("") 
                       }                                                  
                     }
                   }
