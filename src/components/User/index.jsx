@@ -1,5 +1,7 @@
 import styles from "./styles.css"
 
+// Componente integrante da lista de usuários, contendo informações do usuário e o botão "pagar".
+
 export function User({pic, name, id, username, setSelectedUser, setTransactionStatus}) {
     return (
         <li className="user">

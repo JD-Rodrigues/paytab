@@ -1,5 +1,7 @@
 import styles from "./styles.css"
 
+// Modal de pagamento
+
 export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
     const input = document.querySelector(".form__input")
     const validCard = "Cartão com final 1111"
@@ -12,6 +14,8 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
             value:0
           }
 
+    // Verifica se algum valor foi inserido.
+    
     const validateInput = () => {
         const input = document.querySelector(".form__input")
         if (!input.value) {
@@ -22,6 +26,8 @@ export function ModalPay({name, setSelectedUser, setTransactionStatus}) {
         }       
     }
     
+    // Realiza o post de pagamento e retorna se foi aprovado ou não.
+
     const sendMoney = async () => {
         const selectedCard = document.querySelector(".select__card")
         if (selectedCard.value === validCard) {

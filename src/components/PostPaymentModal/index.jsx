@@ -1,5 +1,7 @@
 import styles from "./styles.css"
 
+//Modal do extrato de pagamento
+
 export function PostPaymentModal({transactionStatus, setTransactionStatus}) {
     return (
         <div className="modal__pay__wrapper">

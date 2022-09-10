@@ -1,4 +1,4 @@
-import logo from "./pair-of-bills.png"
+import logo from "./assets/images/pair-of-bills.png"
 import "./App.css";
 import { useEffect } from "react";
 import { User } from "./components/User";
