@@ -1,4 +1,6 @@
 import styles from "./styles.css"
+import { maskNumberPtBr } from "../../lib/maskMoneyPtBr"
+import { priceValidation } from "../../lib/maskMoneyPtBr"
 
 // Modal de pagamento
 
@@ -12,6 +14,12 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
       destination_user_id: selectedUser.id,
       value:paidValue
   }
+
+    //Máscara - recebe o value do input type=text e o reinsere formatado.
+
+    const maskMoney = (e) => {     
+      e.target.value = maskNumberPtBr(priceValidation(e.target.value))
+    }
 
     // Verifica se algum valor foi inserido.
 
@@ -51,10 +59,12 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
             </header> 
             <form className="form__pay" action="">
                 <input 
-                  type="number" 
+                  type="text" 
                   className="form__input" 
                   placeholder="R$ 0,00" 
-                  onInput={(e)=>setPaidValue(e.target.value)}
+                  onInput={(e)=>{
+                    maskMoney(e)
+                  }}
                 />
                 <select className="form__input select__card">
                   <option>{validCard}</option>
@@ -62,12 +72,14 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
                 </select>
                 <button 
                   className="form__input form__input--submit" 
-                  onClick = {
+                  onClick = {  
                     async (e) => {
                       e.preventDefault()
-                      if(validateInput()){                       
+                      if(validateInput()){  
+                          e.target.disabled = true   
+                          console.log(1)              
                           setTransactionStatus(await sendMoney(bodyPost)) 
-                          setSelectedUser("") 
+                          setSelectedUser("")
                       }                                                  
                     }
                   }

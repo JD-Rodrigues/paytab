@@ -15,7 +15,7 @@ export function PostPaymentModal({transactionStatus, setTransactionStatus}) {
                         : <span>O pagamento <strong>não</strong> foi concluído com  sucesso.</span>  
                 }
                 <p 
-                    onClick={()=> setTransactionStatus("")} 
+                    onClick={(e)=>setTransactionStatus("")} 
                     className="back"
                 >
                     ← Voltar
