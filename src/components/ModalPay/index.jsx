@@ -4,7 +4,8 @@ import { priceValidation } from "../../lib/maskMoneyPtBr"
 
 // Modal de pagamento
 
-export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, paidValue, setPaidValue}) {
+export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, paidValue, setPaidValue, showHideModals}) {
+  const form = document.querySelector(".form__pay")
     const validCard = "Cartão com final 1111"
     const invalidCard = "Cartão com final 1234"
     const bodyPost = {
@@ -14,6 +15,7 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
       destination_user_id: selectedUser.id,
       value:paidValue
   }
+    
 
     //Máscara - recebe o value do input type=text e o reinsere formatado.
 
@@ -53,7 +55,7 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
     }
 
     return (
-        <div className="modal__pay__wrapper">
+        <>
             <header className="modal__pay__header">
                 Pagamento para <span className="receiver__name">{selectedUser.name}</span>
             </header> 
@@ -65,6 +67,7 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
                   onInput={(e)=>{
                     maskMoney(e)
                   }}
+                  
                 />
                 <select className="form__input select__card">
                   <option>{validCard}</option>
@@ -76,10 +79,13 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
                     async (e) => {
                       e.preventDefault()
                       if(validateInput()){  
-                          e.target.disabled = true   
-                          console.log(1)              
+                          e.target.disabled = true                
                           setTransactionStatus(await sendMoney(bodyPost)) 
                           setSelectedUser("")
+                          showHideModals(document.querySelector("#modal__pay"))
+                          showHideModals(document.querySelector("#modal__post__pay"))
+                          form.reset()
+                          e.target.disabled = false                         
                       }                                                  
                     }
                   }
@@ -87,12 +93,15 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
                   Pagar 
                 </button>
                 <p 
-                  onClick={()=> setSelectedUser("")} 
+                  onClick={()=> {
+                    setSelectedUser("")
+                    showHideModals(document.querySelector("#modal__pay"))
+                  }} 
                   className="back"
                 >
                   ← Voltar
                 </p>
             </form>          
-        </div>
+        </>
     )
 }

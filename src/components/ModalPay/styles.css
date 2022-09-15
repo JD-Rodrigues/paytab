@@ -1,12 +1,3 @@
-.modal__pay__wrapper {    
-    min-width: 300px;
-    position: fixed;
-    top: 100px;
-    background-color: var(--secondary);
-    border: var(--main) solid 1px;
-    border-radius: 5px;
-}
-
 .modal__pay__header {
     padding: 10px;
     font-size: 14px;
@@ -55,7 +46,7 @@
 }
 
 @media (min-width: 768px) {
-    .modal__pay__wrapper {
+    .dialog {
         min-width: 400px;
     }
 }

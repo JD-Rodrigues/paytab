@@ -18,6 +18,12 @@ function App() {
         .then(data=> setUserslist(data))
   },[])
 
+  const showHideModals = (modalPath) => {
+    modalPath.open ? modalPath.close() : modalPath.showModal()
+  }
+
+  
+
   return (
     <div className="app">
       <header className="app__header">        
@@ -44,24 +50,27 @@ function App() {
                   setTransactionStatus={setTransactionStatus}
                   id={item.id} 
                   username={item.username}
+                  showHideModals = {showHideModals}
                 />  
               )
               : <Loading />                   
-          }   
-          {
-            selectedUser && <ModalPay 
-                              selectedUser={selectedUser} 
-                              setSelectedUser={setSelectedUser} transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} 
-                              paidValue={paidValue}
-                              setPaidValue={setPaidValue} 
-                            />
-          }
-          {
-            transactionStatus && <PostPaymentModal 
-                                  transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus}
-                                 />
-          }               
+          }           
         </ul>
+        <dialog className="dialog" id="modal__pay">
+            <ModalPay 
+              selectedUser={selectedUser} 
+              setSelectedUser={setSelectedUser} transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} 
+              paidValue={paidValue}
+              setPaidValue={setPaidValue} 
+              showHideModals={showHideModals}
+            />
+        </dialog>
+        <dialog className="dialog" id="modal__post__pay">
+            <PostPaymentModal 
+              transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus}
+              showHideModals={showHideModals}
+            />  
+        </dialog>  
       </article>
       <footer className="footer">
         <p>© 2022 - Desenvolvido por JD Rodrigues</p>
