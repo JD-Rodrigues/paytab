@@ -18,11 +18,10 @@ function App() {
         .then(data=> setUserslist(data))
   },[])
 
+
   const showHideModals = (modalPath) => {
     modalPath.open ? modalPath.close() : modalPath.showModal()
-  }
-
-  
+  }  
 
   return (
     <div className="app">
@@ -56,20 +55,28 @@ function App() {
               : <Loading />                   
           }           
         </ul>
-        <dialog className="dialog" id="modal__pay">
-            <ModalPay 
-              selectedUser={selectedUser} 
-              setSelectedUser={setSelectedUser} transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} 
-              paidValue={paidValue}
-              setPaidValue={setPaidValue} 
-              showHideModals={showHideModals}
-            />
+        <dialog 
+          onClick={(e)=>showHideModals(e.target)} 
+          className="dialog dialog__pay" 
+          id="modal__pay"
+        >
+          <ModalPay 
+            selectedUser={selectedUser} 
+            setSelectedUser={setSelectedUser} transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} 
+            paidValue={paidValue}
+            setPaidValue={setPaidValue} 
+            showHideModals={showHideModals}
+          />
         </dialog>
-        <dialog className="dialog" id="modal__post__pay">
-            <PostPaymentModal 
-              transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus}
-              showHideModals={showHideModals}
-            />  
+        <dialog
+          onClick={(e)=>showHideModals(e.target)} 
+          className="dialog dialog__post__pay" 
+          id="modal__post__pay"
+        >
+          <PostPaymentModal 
+            transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus}
+            showHideModals={showHideModals}
+          />  
         </dialog>  
       </article>
       <footer className="footer">

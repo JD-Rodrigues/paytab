@@ -43,6 +43,7 @@
     font-weight: bold;
     color: var(--main);
     cursor: pointer;
+    align-self: flex-start;
 }
 
 @media (min-width: 768px) {

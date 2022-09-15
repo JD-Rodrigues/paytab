@@ -14,7 +14,7 @@ export function PostPaymentModal({transactionStatus, setTransactionStatus, showH
                         ? "O pagamento foi concluído com sucesso."
                         : <span>O pagamento <strong>não</strong> foi concluído com  sucesso.</span>  
                 }
-                <p 
+                <span 
                     onClick={(e)=>{
                         setTransactionStatus("")
                         showHideModals(document.querySelector("#modal__post__pay"))
@@ -22,7 +22,7 @@ export function PostPaymentModal({transactionStatus, setTransactionStatus, showH
                     className="back"
                 >
                     ← Voltar
-                </p>
+                </span>
             </article>        
         </>
     )

@@ -6,8 +6,10 @@ import { priceValidation } from "../../lib/maskMoneyPtBr"
 
 export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, paidValue, setPaidValue, showHideModals}) {
   const form = document.querySelector(".form__pay")
-    const validCard = "Cartão com final 1111"
-    const invalidCard = "Cartão com final 1234"
+    const cards = [
+      "1111111111111111",
+      "4111111111111234"
+    ]
     const bodyPost = {
       card_number: '1111111111111111',
       cvv: 789,
@@ -40,7 +42,7 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
     const sendMoney = async (dataPost) => {
         const selectedCard = document.querySelector(".select__card")
 
-        if (selectedCard.value === validCard) {
+        if (selectedCard.value === '1111111111111111') {
             const response = await fetch("https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989",
             {
               method: "POST",
@@ -56,52 +58,51 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
 
     return (
         <>
-            <header className="modal__pay__header">
-                Pagamento para <span className="receiver__name">{selectedUser.name}</span>
-            </header> 
-            <form className="form__pay" action="">
-                <input 
-                  type="text" 
-                  className="form__input" 
-                  placeholder="R$ 0,00" 
-                  onInput={(e)=>{
-                    maskMoney(e)
-                  }}
-                  
-                />
-                <select className="form__input select__card">
-                  <option>{validCard}</option>
-                  <option>{invalidCard}</option>
-                </select>
-                <button 
-                  className="form__input form__input--submit" 
-                  onClick = {  
-                    async (e) => {
-                      e.preventDefault()
-                      if(validateInput()){  
-                          e.target.disabled = true                
-                          setTransactionStatus(await sendMoney(bodyPost)) 
-                          setSelectedUser("")
-                          showHideModals(document.querySelector("#modal__pay"))
-                          showHideModals(document.querySelector("#modal__post__pay"))
-                          form.reset()
-                          e.target.disabled = false                         
-                      }                                                  
-                    }
+          <header className="modal__pay__header">
+              Pagamento para <span className="receiver__name">{selectedUser.name}</span>
+          </header> 
+          <form className="form__pay" action="">
+              <input 
+                type="text" 
+                className="form__input" 
+                placeholder="R$ 0,00" 
+                onInput={(e)=>{
+                  maskMoney(e)
+                }}
+                
+              />
+              <select className="form__input select__card">
+                {cards.map(card => <option key={card} value={card}>Cartão com final {card.substring(12)}</option>)} 
+              </select>
+              <button 
+                className="form__input form__input--submit" 
+                onClick = {  
+                  async (e) => {
+                    e.preventDefault()
+                    if(validateInput()){  
+                        e.target.disabled = true                
+                        setTransactionStatus(await sendMoney(bodyPost)) 
+                        setSelectedUser("")
+                        showHideModals(document.querySelector("#modal__pay"))
+                        showHideModals(document.querySelector("#modal__post__pay"))
+                        form.reset()
+                        e.target.disabled = false                         
+                    }                                                  
                   }
-                >
-                  Pagar 
-                </button>
-                <p 
-                  onClick={()=> {
-                    setSelectedUser("")
-                    showHideModals(document.querySelector("#modal__pay"))
-                  }} 
-                  className="back"
-                >
-                  ← Voltar
-                </p>
-            </form>          
+                }
+              >
+                Pagar 
+              </button>
+              <span 
+                onClick={()=> {
+                  setSelectedUser("")
+                  showHideModals(document.querySelector("#modal__pay"))
+                }} 
+                className="back"
+              >
+                ← Voltar
+              </span>
+          </form>          
         </>
     )
 }
