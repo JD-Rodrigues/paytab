@@ -4,7 +4,7 @@ import { priceValidation } from "../../lib/maskMoneyPtBr"
 
 // Modal de pagamento
 
-export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, paidValue, setPaidValue, showHideModals}) {
+export function ModalPay({selectedUser, setTransactionStatus, paidValue, setPaidValue, showHideModals}) {
   const form = document.querySelector(".form__pay")
     const cards = [
       "1111111111111111",
@@ -61,13 +61,14 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
           <header className="modal__pay__header">
               Pagamento para <span className="receiver__name">{selectedUser.name}</span>
           </header> 
-          <form className="form__pay" action="">
+          <form onClick={(e)=>e.stopPropagation()} className="form__pay" action="">
               <input 
                 type="text" 
                 className="form__input" 
                 placeholder="R$ 0,00" 
                 onInput={(e)=>{
                   maskMoney(e)
+                  setPaidValue(e.target.value)
                 }}
                 
               />
@@ -79,12 +80,12 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
                 onClick = {  
                   async (e) => {
                     e.preventDefault()
+                    e.stopPropagation()
                     if(validateInput()){  
-                        e.target.disabled = true                
-                        setTransactionStatus(await sendMoney(bodyPost)) 
-                        setSelectedUser("")
-                        showHideModals(document.querySelector("#modal__pay"))
-                        showHideModals(document.querySelector("#modal__post__pay"))
+                        e.target.disabled = true;                
+                        setTransactionStatus(await sendMoney(bodyPost)); 
+                        showHideModals(document.querySelector("#modal__pay"));
+                        showHideModals(document.querySelector("#modal__post__pay"));
                         form.reset()
                         e.target.disabled = false                         
                     }                                                  
@@ -94,8 +95,8 @@ export function ModalPay({selectedUser, setSelectedUser, setTransactionStatus, p
                 Pagar 
               </button>
               <span 
-                onClick={()=> {
-                  setSelectedUser("")
+                onClick={(e)=> {
+                  e.stopPropagation()
                   showHideModals(document.querySelector("#modal__pay"))
                 }} 
                 className="back"

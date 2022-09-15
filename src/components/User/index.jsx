@@ -2,7 +2,7 @@ import styles from "./styles.css"
 
 // Componente integrante da lista de usuários, contendo informações do usuário e o botão "pagar".
 
-export function User({pic, name, id, username, setSelectedUser, setTransactionStatus, showHideModals}) {    
+export function User({pic, name, id, username, setSelectedUser, showHideModals}) {    
     return (
         <li className="user">
             <div className="user__profile">                
@@ -19,7 +19,6 @@ export function User({pic, name, id, username, setSelectedUser, setTransactionSt
             </div>
             <button 
                 onClick={()=>{
-                    setTransactionStatus("")
                     setSelectedUser({name:name,id:id})
                     showHideModals(document.querySelector("#modal__pay"))
                 }}                 

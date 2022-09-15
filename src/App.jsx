@@ -20,7 +20,7 @@ function App() {
 
 
   const showHideModals = (modalPath) => {
-    modalPath.open ? modalPath.close() : modalPath.showModal()
+    modalPath.open ? modalPath.close() : modalPath.showModal();
   }  
 
   return (
@@ -42,13 +42,12 @@ function App() {
               ? usersList.map(item=>
                 <User 
                   pic={item.img} 
-                  name={item.name} 
-                  key={item.id} 
-                  selectedUser={selectedUser} 
-                  setSelectedUser={setSelectedUser} 
-                  setTransactionStatus={setTransactionStatus}
+                  name={item.name}  
                   id={item.id} 
                   username={item.username}
+                  key={`${item.name}${item.id}`} 
+                  selectedUser={selectedUser}
+                  setSelectedUser={setSelectedUser}  
                   showHideModals = {showHideModals}
                 />  
               )
@@ -61,20 +60,20 @@ function App() {
           id="modal__pay"
         >
           <ModalPay 
-            selectedUser={selectedUser} 
-            setSelectedUser={setSelectedUser} transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} 
+            selectedUser={selectedUser}  
+            transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus} 
             paidValue={paidValue}
             setPaidValue={setPaidValue} 
             showHideModals={showHideModals}
           />
         </dialog>
-        <dialog
+        <dialog 
           onClick={(e)=>showHideModals(e.target)} 
           className="dialog dialog__post__pay" 
           id="modal__post__pay"
         >
           <PostPaymentModal 
-            transactionStatus={transactionStatus} setTransactionStatus={setTransactionStatus}
+            transactionStatus={transactionStatus}
             showHideModals={showHideModals}
           />  
         </dialog>  

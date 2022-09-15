@@ -2,13 +2,13 @@ import styles from "./styles.css"
 
 //Modal do extrato de pagamento
 
-export function PostPaymentModal({transactionStatus, setTransactionStatus, showHideModals}) {
+export function PostPaymentModal({transactionStatus, showHideModals}) {
     return (
         <>
             <header className="modal__pay__header">
                 Recibo de pagamento
             </header> 
-            <article className="post__pay__status">               
+            <article onClick={(e)=>e.stopPropagation()} className="post__pay__status">               
                 {
                     transactionStatus === "Aprovada"
                         ? "O pagamento foi concluído com sucesso."
@@ -16,7 +16,7 @@ export function PostPaymentModal({transactionStatus, setTransactionStatus, showH
                 }
                 <span 
                     onClick={(e)=>{
-                        setTransactionStatus("")
+                        e.stopPropagation()
                         showHideModals(document.querySelector("#modal__post__pay"))
                     }} 
                     className="back"
