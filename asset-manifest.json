@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/paytab/static/css/main.003bf9c3.css",
-    "main.js": "/paytab/static/js/main.1016c298.js",
+    "main.css": "/paytab/static/css/main.88b7faf9.css",
+    "main.js": "/paytab/static/js/main.037486c8.js",
     "static/js/787.26620858.chunk.js": "/paytab/static/js/787.26620858.chunk.js",
     "static/media/Poppins-Regular.ttf": "/paytab/static/media/Poppins-Regular.35d26b781dc5fda684cc.ttf",
     "static/media/spinner.png": "/paytab/static/media/spinner.0a00a9acf963904026f7.png",
     "index.html": "/paytab/index.html",
-    "main.003bf9c3.css.map": "/paytab/static/css/main.003bf9c3.css.map",
-    "main.1016c298.js.map": "/paytab/static/js/main.1016c298.js.map",
+    "main.88b7faf9.css.map": "/paytab/static/css/main.88b7faf9.css.map",
+    "main.037486c8.js.map": "/paytab/static/js/main.037486c8.js.map",
     "787.26620858.chunk.js.map": "/paytab/static/js/787.26620858.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.003bf9c3.css",
-    "static/js/main.1016c298.js"
+    "static/css/main.88b7faf9.css",
+    "static/js/main.037486c8.js"
   ]
 }
